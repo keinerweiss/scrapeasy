@@ -6,11 +6,9 @@ function scrapeasy($contentSource, $selectors, $priorities=array(NULL,"after")) 
 		foreach($selectors as $k=>$v) {
 			@list($key, $prio) = explode(':', $k);
 			if($prio != $priority) continue;
-			if($prio !== NULL) {
-				$content = isset($results[$key]) ? $results[$key] : NULL;
-			}
+			$content = isset($results[$key]) ? $results[$key] : $content;
 			$fn = $selectors[$k];
-			$results[$k] = $fn($content, $results);
+			$results[$key] = $fn($content, $results);
 		}
 	};
 	$priorities = empty($priorities) ? array(NULL) : $priorities;
